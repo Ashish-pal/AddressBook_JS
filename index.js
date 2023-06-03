@@ -170,7 +170,39 @@ function countContacts() {
   console.log("Total number of contacts:", totalCount);
 }
 
+function searchByCityOrState() {
+    const searchOption = prompt(
+      "Enter 1 to search by City, 2 to search by State: "
+    );
+  
+    let searchKey, searchValue;
+    if (searchOption === "1") {
+      searchKey = "city";
+      searchValue = prompt("Enter the City name: ");
+    } else if (searchOption === "2") {
+      searchKey = "state";
+      searchValue = prompt("Enter the State name: ");
+    } else {
+      console.log("Invalid search option.");
+      return;
+    }
+  
+    const filteredContacts = addressBook.filter(
+      (contact) => contact[searchKey] === searchValue
+    );
+  
+    console.log("Search Results:");
+    if (filteredContacts.length === 0) {
+      console.log("No contacts found.");
+    } else {
+      filteredContacts.forEach((contact) => {
+        console.log(contact);
+      });
+    }
+  }
+
 addContact();
 countContacts();
 editContact();
 deleteContact();
+searchByCityOrState();

@@ -144,6 +144,12 @@ class Contact {
     }
   }
 
+function countContacts() {
+    const totalCount = addressBook.reduce((count) => count + 1, 0);
+    console.log("Total number of contacts:", totalCount);
+  }
+
   addContact();  
+  countContacts();
   editContact();
   deleteContact();

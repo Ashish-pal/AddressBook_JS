@@ -235,6 +235,69 @@ function searchByCityOrState() {
     }
   }
 
+  function sortAddressBookBy(field) {
+    let sortedAddressBook = [];
+  
+    switch (field) {
+      case "name":
+        sortedAddressBook = addressBook.sort((a, b) => {
+          const nameA = `${a.firstName} ${a.lastName}`.toUpperCase();
+          const nameB = `${b.firstName} ${b.lastName}`.toUpperCase();
+          if (nameA < nameB) {
+            return -1;
+          }
+          if (nameA > nameB) {
+            return 1;
+          }
+          return 0;
+        });
+        break;
+  
+      case "city":
+        sortedAddressBook = addressBook.sort((a, b) => {
+          const cityA = a.city.toUpperCase();
+          const cityB = b.city.toUpperCase();
+          if (cityA < cityB) {
+            return -1;
+          }
+          if (cityA > cityB) {
+            return 1;
+          }
+          return 0;
+        });
+        break;
+  
+      case "state":
+        sortedAddressBook = addressBook.sort((a, b) => {
+          const stateA = a.state.toUpperCase();
+          const stateB = b.state.toUpperCase();
+          if (stateA < stateB) {
+            return -1;
+          }
+          if (stateA > stateB) {
+            return 1;
+          }
+          return 0;
+        });
+        break;
+  
+      case "zip":
+        sortedAddressBook = addressBook.sort((a, b) => a.zip - b.zip);
+        break;
+  
+      default:
+        console.log("Invalid field for sorting.");
+        return;
+    }
+  
+    console.log(`Address Book Sorted by ${field.charAt(0).toUpperCase() + field.slice(1)}:`);
+    sortedAddressBook.forEach((contact) => {
+      console.log(
+        `${contact.firstName} ${contact.lastName}, ${contact.address}, ${contact.city}, ${contact.state}, ${contact.zip}, ${contact.phoneNumber}, ${contact.email}`
+      );
+    });
+  }
+
 addContact();
 countContacts();
 editContact();
@@ -242,3 +305,7 @@ deleteContact();
 searchByCityOrState();
 countContactsByCity();
 countContactsByState();
+sortAddressBookBy("name");
+sortAddressBookBy("city");
+sortAddressBookBy("state");
+sortAddressBookBy("zip");

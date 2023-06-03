@@ -130,5 +130,20 @@ class Contact {
     }
   }
 
+  function deleteContact() {
+    const firstName = prompt("Enter First Name of the contact to delete:");
+    const lastName = prompt("Enter Last Name of the contact to delete:");
+  
+    const contactIndex = findContactByName(firstName, lastName);
+    if (contactIndex !== -1) {
+      const deletedContact = addressBook.splice(contactIndex, 1);
+      console.log("Contact deleted successfully!");
+      console.log("Deleted Contact:", deletedContact[0]);
+    } else {
+      console.log("Contact not found.");
+    }
+  }
+
   addContact();  
   editContact();
+  deleteContact();

@@ -201,8 +201,44 @@ function searchByCityOrState() {
     }
   }
 
+  function countContactsByCity() {
+    const countByCity = addressBook.reduce((countMap, contact) => {
+      const { city } = contact;
+      if (countMap.hasOwnProperty(city)) {
+        countMap[city] += 1;
+      } else {
+        countMap[city] = 1;
+      }
+      return countMap;
+    }, {});
+  
+    console.log("Count by City:");
+    for (const city in countByCity) {
+      console.log(`${city}: ${countByCity[city]}`);
+    }
+  }
+  
+  function countContactsByState() {
+    const countByState = addressBook.reduce((countMap, contact) => {
+      const { state } = contact;
+      if (countMap.hasOwnProperty(state)) {
+        countMap[state] += 1;
+      } else {
+        countMap[state] = 1;
+      }
+      return countMap;
+    }, {});
+  
+    console.log("Count by State:");
+    for (const state in countByState) {
+      console.log(`${state}: ${countByState[state]}`);
+    }
+  }
+
 addContact();
 countContacts();
 editContact();
 deleteContact();
 searchByCityOrState();
+countContactsByCity();
+countContactsByState();
